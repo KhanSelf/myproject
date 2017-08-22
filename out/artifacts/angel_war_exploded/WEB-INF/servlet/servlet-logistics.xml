@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.10.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.10.xsd
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.3.10.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.10.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.10.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.10.xsd
+        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.3.10.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.10.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.10.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.10.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.10.xsd">
+
+	<!-- logisticsUrlHandlerMapping -->
+
+	<bean id="logisticsUrlHandlerMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="order" value="1" />
+		<property name="alwaysUseFullPath" value="true" />
+		<property name="mappings">
+			<props>
+				<prop key="/logistics/business/customerform.html">urlFilenameViewController</prop>
+				<prop key="/logistics/business/estimateform.html">urlFilenameViewController</prop>
+				<prop key="/logistics/business/contractform.html">urlFilenameViewController</prop>
+				<prop key="/logistics/business/shippingform.html">urlFilenameViewController</prop>
+				<prop key="/logistics/business/customer.do">customerController</prop>
+				<prop key="/logistics/business/estimate.do">estimateController</prop>
+				<prop key="/logistics/business/contract.do">contractController</prop>
+				<prop key="/logistics/business/shipping.do">shippingController</prop>
+
+				<prop key="/logistics/item/itemform.html">urlFilenameViewController</prop>
+				<prop key="/logistics/item/bomform.html">urlFilenameViewController</prop>
+				<prop key="/logistics/item/stockform.html">urlFilenameViewController</prop>
+				<prop key="/logistics/item/item.do">itemController</prop>
+				<prop key="/logistics/item/bom.do">bomController</prop>
+				<prop key="/logistics/item/stock.do">stockController</prop>
+
+				<prop key="/logistics/product/mpsform.html">urlFilenameViewController</prop>
+				<prop key="/logistics/product/mrpform.html">urlFilenameViewController</prop>
+				<prop key="/logistics/product/purchaseform.html">urlFilenameViewController</prop>
+				<prop key="/logistics/product/mps.do">mpsController</prop>
+				<prop key="/logistics/product/mrp.do">mrpController</prop>
+				<prop key="/logistics/product/purchase.do">purchaseController</prop>
+			</props>
+		</property>
+	</bean>
+
+
+
+	<bean id="customerController"
+		class="kr.co.angelinus.logistics.business.controller.CustomerController"
+		p:cacheSeconds="0" p:methodNameResolver-ref="parameterMethodNameResolver"
+		p:businessServiceFacade-ref="businessServiceFacade"
+		p:messageSource-ref="messageSource" />
+
+	<bean id="estimateController"
+		class="kr.co.angelinus.logistics.business.controller.EstimateController"
+		p:cacheSeconds="0" p:methodNameResolver-ref="parameterMethodNameResolver"
+		p:businessServiceFacade-ref="businessServiceFacade"
+		p:messageSource-ref="messageSource" />
+
+	<bean id="contractController"
+		class="kr.co.angelinus.logistics.business.controller.ContractController"
+		p:cacheSeconds="0" p:methodNameResolver-ref="parameterMethodNameResolver"
+		p:businessServiceFacade-ref="businessServiceFacade"
+		p:messageSource-ref="messageSource" />
+
+	<bean id="shippingController"
+		class="kr.co.angelinus.logistics.business.controller.ShippingController"
+		p:cacheSeconds="0" p:methodNameResolver-ref="parameterMethodNameResolver"
+		p:businessServiceFacade-ref="businessServiceFacade"
+		p:messageSource-ref="messageSource" />
+
+	<bean id="itemController"
+		class="kr.co.angelinus.logistics.item.controller.ItemController"
+		p:cacheSeconds="0" p:methodNameResolver-ref="parameterMethodNameResolver"
+		p:itemServiceFacade-ref="itemServiceFacade" p:messageSource-ref="messageSource" />
+
+	<bean id="bomController"
+		class="kr.co.angelinus.logistics.item.controller.BomController"
+		p:cacheSeconds="0" p:methodNameResolver-ref="parameterMethodNameResolver"
+		p:itemServiceFacade-ref="itemServiceFacade" />
+
+	<bean id="stockController"
+		class="kr.co.angelinus.logistics.item.controller.StockController"
+		p:cacheSeconds="0" p:methodNameResolver-ref="parameterMethodNameResolver"
+		p:itemServiceFacade-ref="itemServiceFacade" />
+
+	<bean id="mpsController"
+		class="kr.co.angelinus.logistics.product.controller.MpsController"
+		p:cacheSeconds="0" p:methodNameResolver-ref="parameterMethodNameResolver"
+		p:productServiceFacade-ref="productServiceFacade" />
+
+	<bean id="mrpController"
+		class="kr.co.angelinus.logistics.product.controller.MrpController"
+		p:cacheSeconds="0" p:methodNameResolver-ref="parameterMethodNameResolver"
+		p:productServiceFacade-ref="productServiceFacade" />
+
+	<bean id="purchaseController"
+		class="kr.co.angelinus.logistics.product.controller.PurchaseController"
+		p:cacheSeconds="0" p:methodNameResolver-ref="parameterMethodNameResolver"
+		p:productServiceFacade-ref="productServiceFacade" />
+
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="5" />
+	</bean>
+
+</beans>

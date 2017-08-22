@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir = "/WEB-INF/jsp/decorator">
+	<excludes>
+		<pattern>/base/postform.html</pattern>
+	</excludes>
+
+	<decorator name = "main" page = "decorator.jsp">
+		<pattern>/*</pattern>
+	</decorator>
+</decorators>

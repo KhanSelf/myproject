@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:c="http://www.springframework.org/schema/c" xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:lang="http://www.springframework.org/schema/lang" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.10.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.10.xsd
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.3.10.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.10.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.10.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.10.xsd
+        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.3.10.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.10.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.10.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.10.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.10.xsd">
+
+
+    <!-- businessServiceFacade /ref-businessApplicationService -->
+
+    <bean id="businessServiceFacade"
+          class="kr.co.angelinus.logistics.business.service.BusinessServiceFacadeImpl"
+          p:businessApplicationService-ref="businessApplicationService"/>
+
+    <!-- itemServiceFacade /ref-itemApplicationService -->
+
+    <bean id="itemServiceFacade"
+          class="kr.co.angelinus.logistics.item.service.ItemServiceFacadeImpl"
+          p:itemApplicationService-ref="itemApplicationService"/>
+
+    <!-- productServiceFacade /ref-productApplicationService -->
+
+    <bean id="productServiceFacade"
+          class="kr.co.angelinus.logistics.product.service.ProductServiceFacadeImpl"
+          p:productApplicationService-ref="productApplicationService"/>
+
+    <!-- businessApplicationService /ref-contractDAO, customerDAO, estimateDAO,
+        shippingDAO, stockDAO, codeDetailDAO -->
+
+    <bean id="businessApplicationService"
+          class="kr.co.angelinus.logistics.business.applicationservice.BusinessApplicationServiceImpl"
+          p:contractDAO-ref="contractDAO" p:customerDAO-ref="customerDAO"
+          p:estimateDAO-ref="estimateDAO" p:shippingDAO-ref="shippingDAO"
+          p:stockDAO-ref="stockDAO" p:codeDetailDAO-ref="codeDetailDAO"/>
+
+    <!-- itemApplicationService /ref-itemDAO, warehouseDAO, stockDAO, codeDetailDAO -->
+
+    <bean id="itemApplicationService"
+          class="kr.co.angelinus.logistics.item.applicationservice.ItemApplicationServiceImpl"
+          p:itemDAO-ref="itemDAO" p:bomDAO-ref="bomDAO" p:warehouseDAO-ref="warehouseDAO"
+          p:stockDAO-ref="stockDAO" p:codeDetailDAO-ref="codeDetailDAO"/>
+
+    <!-- productApplicationService /ref-mpsDAO, mrpDAO, contractDAO, purchaseDAO,
+        stockDAO -->
+
+    <bean id="productApplicationService"
+          class="kr.co.angelinus.logistics.product.applicationservice.ProductApplicationServiceImpl"
+          p:mpsDAO-ref="mpsDAO" p:mrpDAO-ref="mrpDAO" p:contractDAO-ref="contractDAO"
+          p:purchaseDAO-ref="purchaseDAO" p:stockDAO-ref="stockDAO"/>
+
+
+    <bean id="contractDAO"
+          class="kr.co.angelinus.logistics.business.dao.ContractDAOImpl"
+          p:dataSourceTransactionManager-ref="dataSourceTransactionManager"/>
+
+    <bean id="customerDAO"
+          class="kr.co.angelinus.logistics.business.dao.CustomerDAOImpl"
+          p:dataSourceTransactionManager-ref="dataSourceTransactionManager"/>
+
+    <bean id="estimateDAO"
+          class="kr.co.angelinus.logistics.business.dao.EstimateDAOImpl"
+          p:dataSourceTransactionManager-ref="dataSourceTransactionManager"/>
+
+    <bean id="shippingDAO"
+          class="kr.co.angelinus.logistics.business.dao.ShippingDAOImpl"
+          p:dataSourceTransactionManager-ref="dataSourceTransactionManager"/>
+
+    <bean id="stockDAO"
+          class="kr.co.angelinus.logistics.item.dao.StockDAOImpl"
+          p:dataSourceTransactionManager-ref="dataSourceTransactionManager"/>
+
+    <bean id="codeDetailDAO"
+          class="kr.co.angelinus.base.dao.CodeDetailDAOImpl"
+          p:dataSourceTransactionManager-ref="dataSourceTransactionManager"/>
+
+    <bean id="itemDAO"
+          class="kr.co.angelinus.logistics.item.dao.ItemDAOImpl"
+          p:dataSourceTransactionManager-ref="dataSourceTransactionManager"/>
+
+    <bean id="bomDAO"
+          class="kr.co.angelinus.logistics.item.dao.BomDAOImpl"
+          p:dataSourceTransactionManager-ref="dataSourceTransactionManager"/>
+
+    <bean id="warehouseDAO"
+          class="kr.co.angelinus.logistics.item.dao.WarehouseDAOImpl"
+          p:dataSourceTransactionManager-ref="dataSourceTransactionManager"/>
+
+    <bean id="mpsDAO"
+          class="kr.co.angelinus.logistics.product.dao.MpsDAOImpl"
+          p:dataSourceTransactionManager-ref="dataSourceTransactionManager"/>
+
+    <bean id="mrpDAO"
+          class="kr.co.angelinus.logistics.product.dao.MrpDAOImpl"
+          p:dataSourceTransactionManager-ref="dataSourceTransactionManager"/>
+
+    <bean id="purchaseDAO"
+          class="kr.co.angelinus.logistics.product.dao.PurchaseDAOImpl"
+          p:dataSourceTransactionManager-ref="dataSourceTransactionManager"/>
+
+
+</beans>
